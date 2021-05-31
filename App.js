@@ -44,6 +44,9 @@ const voices = [
 ];
 
 class App extends PureComponent {
+  state = {
+    progress: 0.1232
+  }
   onUseVoice = name => {
     const {history} = this.props;
     history.push("/record-audio"); 
@@ -68,8 +71,15 @@ class App extends PureComponent {
     history.push("/unlock-premium");
   }
 
+  onCancelLoading = () => {
+    const {history } = this.props;
+    history.goBack();
+  }
+
+
   render() {
     const { history } = this.props;
+    const { progress } = this.state;
     return (
       <PaperProvider theme={theme}>
         <Appbar.Header style={{elevation: 4}}>
@@ -80,7 +90,7 @@ class App extends PureComponent {
         <Switch>
           <Route path="/record-audio" render={() => <RecordAudio/>}/>
           <Route path="/unlock-premium" render={() => <UnlockPremium/>}/>
-          <Route path="/convert-audio" render={() => <ConvertAudio/>}/>
+          <Route path="/convert-audio" render={() => <ConvertAudio onCancelLoading={this.onCancelLoading} progress={progress}/>}/>
           <Route path="/" render={() => <SelectVoice voices={voices} onUseVoice={this.onUseVoice}/>}/>
         </Switch>
         <StatusBar style="auto" />

@@ -5,6 +5,13 @@ import {
 } from  "react-native";
 import { withRouter } from "react-router-native";
 import { IconButton, withTheme, Text, Colors } from "react-native-paper";
+import AudioRecorderPlayer, {
+     AVEncoderAudioQualityIOSType,
+     AVEncodingOption,
+     AudioEncoderAndroidType,
+     AudioSet,
+     AudioSourceAndroidType,
+} from 'react-native-audio-recorder-player';
 
 function msToString (s) {
     let ms = String(s % 1000).slice(0, 2);
@@ -20,24 +27,39 @@ function msToString (s) {
   }
 
 class RecordAudio extends PureComponent {
-    state = { isRecording: false, timeElapsed: "00:00", micBars: 0, audio: null };
 
-    startRecording = () => {
-         this.setState({isRecording: true, audio: null}, this.startCounter);
+    constructor(props) {
+        super(props);
+        this.audioRecorderPlayer = new AudioRecorderPlayer();
+        this.state = { 
+            isRecording: false, 
+            timeElapsed: "00:00", 
+            micBars: 0, 
+            audio: null 
+        };
     }
 
-    startCounter = () => {
-        this.startTime = Date.now();
-        this.tick();
-    }
-
-    tick = () => {
-        const {isRecording} = this.state;
-        if(isRecording) {
-            const msElapsed = Date.now() - this.startTime;
-            this.setState({timeElapsed: msToString(msElapsed)});
-            setTimeout(this.tick, 25);
-        }
+    startRecording = async () => {
+        const path = 'hello.m4a';
+        const audioSet = {
+            AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
+            AudioSourceAndroid: AudioSourceAndroidType.MIC,
+            AVEncoderAudioQualityKeyIOS: AVEncoderAudioQualityIOSType.high,
+            AVNumberOfChannelsKeyIOS: 2,
+            AVFormatIDKeyIOS: AVEncodingOption.aac,
+        };
+        console.log(this.audioRecorderPlayer);
+        const uri = await this.audioRecorderPlayer.startRecorder(path, audioSet);
+        this.audioRecorderPlayer.addRecordBackListener((e) => {
+            console.log("HERE");
+            this.setState({
+                recordSecs: e.current_position,
+                timeElapsed: this.audioRecorderPlayer.mmssss(
+                    Math.floor(e.current_position),
+                ),
+            });
+        });
+        this.setState({isRecording: true, audio: null});
     }
 
     stopRecording = () => {
@@ -89,7 +111,7 @@ class RecordAudio extends PureComponent {
                         size={80}
                         color={theme.colors.primary}
                         onPress={isRecording ? this.stopRecording : this.startRecording}
-                        animated
+                        animated 
                     />
                     <IconButton
                         icon="check"

@@ -15,6 +15,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
+    "react-native-audio-recorder-player": "^3.0.7",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-paper": "^4.9.1",
     "react-native-reanimated": "~2.1.0",
