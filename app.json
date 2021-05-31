@@ -1,0 +1,19 @@
+{
+  "name": "project",
+  "displayName": "project",
+  "expo": {
+    "name": "project",
+    "slug": "project",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "web": {
+    "build": {
+      "babel": {
+        "include": ["react-router-native"]
+      }
+    }
+  }
+}
