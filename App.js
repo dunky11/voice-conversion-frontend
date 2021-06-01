@@ -23,23 +23,23 @@ const theme = {
 const voices = [
   {
     name: "Donald Trump",
-    image: require('./assets/trump_512x512.png'),
+    image: require('./assets/imgs/trump_512x512.png'),
   },
   { 
     name: "Kim Kardashian",
-    image: require('./assets/kim_kardashian_512x512.png'),
+    image: require('./assets/imgs/kim_kardashian_512x512.png'),
   },
   {
     name: "Kanye West",
-    image: require('./assets/kanye_west_512x512.png'),
+    image: require('./assets/imgs/kanye_west_512x512.png'),
   },
   {
     name: "Justin Bieber",
-    image: require('./assets/justin_bieber_512x512.png'),
+    image: require('./assets/imgs/justin_bieber_512x512.png'),
   },
   {
     name: "Billie Eilish",
-    image: require('./assets/billie_eilish_512x512.png'),
+    image: require('./assets/imgs/billie_eilish_512x512.png'),
   }
 ];
 

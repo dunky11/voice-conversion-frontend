@@ -20,7 +20,7 @@ function UnlockPremium(props) {
             <View>
                 <View style={{position: "relative"}}>
                     <Image 
-                        source={require('../assets/trump_512x512.png')}
+                        source={require('../assets/imgs/trump_512x512.png')}
                         style={{
                             width: Dimensions.get('window').width - 32, 
                             height: Dimensions.get('window').width - 32,

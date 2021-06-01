@@ -2,6 +2,7 @@ import React from "react";
 import {
     StyleSheet, 
     View,
+    NativeModules
 } from  "react-native";
 import {
     Text, 
@@ -13,14 +14,17 @@ import {
     List,
     withTheme
 } from "react-native-paper";
+const { VoiceConversion } = NativeModules;
+
 
 function UnlockPremium(props) {
     const {theme} = props;
+    console.log(VoiceConversion);
     return (
         <View style={styles.container}>
             <View>
                 <Card>
-                    <Card.Cover source={require("../assets/women_with_mic.png")} />
+                    <Card.Cover source={require("../assets/imgs/women_with_mic.png")} />
                             {/*<List.Section>
                                 <List.Item 
                                     title="First Item" 
